@@ -1,0 +1,89 @@
+<div class="container">
+  <h1>Gestión de Empleados</h1>
+  <section>
+    <h2>Lista de Empleados</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>No. Empleado</th>
+          <th>Empresa</th>
+          <th>Sexo</th>
+          <th>Fecha de Nacimiento</th>
+          <th>CURP</th>
+          <th>RFC</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empleado of empleados">
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.apellidoPaterno }}</td>
+          <td>{{ empleado.apellidoMaterno }}</td>
+          <td>{{ empleado.numeroEmpleado }}</td>
+          <td>{{ empleado.empresa }}</td>
+          <td>{{ empleado.sexo ? 'Masculino' : 'Femenino' }}</td>
+          <td>{{ empleado.fechaNacimiento | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ empleado.curp }}</td>
+          <td>{{ empleado.rfc }}</td>
+          <td>
+            <button class="btn btn-warning action" (click)="editarEmpleado(empleado)">Editar</button>
+            <button class="btn btn-danger action" (click)="eliminarEmpleado(empleado.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>{{ nuevoEmpleado.id ? 'Editar Empleado' : 'Agregar Empleado' }}</h2>
+    <form (ngSubmit)="agregarEmpleado()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoEmpleado.nombre" name="nombre" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <input type="text" id="apellidoPaterno" [(ngModel)]="nuevoEmpleado.apellidoPaterno" name="apellidoPaterno" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <input type="text" id="apellidoMaterno" [(ngModel)]="nuevoEmpleado.apellidoMaterno" name="apellidoMaterno" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="empresa">Empresa</label>
+        <input type="text" id="empresa" [(ngModel)]="nuevoEmpleado.empresa" name="empresa" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" [(ngModel)]="nuevoEmpleado.sexo" name="sexo" class="form-control">
+          <option [value]="true">Masculino</option>
+          <option [value]="false">Femenino</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <input type="date" id="fechaNacimiento" [(ngModel)]="nuevoEmpleado.fechaNacimiento" name="fechaNacimiento" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="curp">CURP</label>
+        <input type="text" id="curp" [(ngModel)]="nuevoEmpleado.curp" name="curp" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="rfc">RFC</label>
+        <input type="text" id="rfc" [(ngModel)]="nuevoEmpleado.rfc" name="rfc" required class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary p-3">{{ nuevoEmpleado.id ? 'Actualizar' : 'Agregar' }}</button>
+    </form>
+  </section>
+</div>
